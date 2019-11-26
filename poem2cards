@@ -1,0 +1,14 @@
+#!/usr/bin/env rc
+
+tr '\n' '@' |
+sed 's/@@/\n/g;s/@$/\n/' |
+awk -F@ '{
+	for(i=1;i<=NF; i++)
+	{
+		for(j=1;j<=NF;j++)
+		{
+			if(i==j) printf("_\\n"); else printf("%s\\n", $j);
+		}
+		printf("\\n\t%s\n", $i);
+	}
+}'
