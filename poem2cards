@@ -9,6 +9,6 @@ awk -F@ '{
 		{
 			if(i==j) printf("_\\n"); else printf("%s\\n", $j);
 		}
-		printf("\\n\t%s\n", $i);
+		printf("\t%s\n", $i);
 	}
 }'
