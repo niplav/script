@@ -1,1 +1,5 @@
 Add README, makefile and manpage
+
+Add moving/cumulative average of N as awk script
+Add card generation script from title/one single line.
+Add sum awk script
