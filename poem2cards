@@ -1,6 +1,6 @@
 #!/usr/bin/env rc
 
-tr '\n' '@' |
+tr '\n' '@' <$1 |
 sed 's/@@/\n/g;s/@$/\n/' |
 awk -F@ '{
 	for(i=1;i<=NF; i++)
@@ -11,4 +11,29 @@ awk -F@ '{
 		}
 		printf("\t%s\n", $i);
 	}
+}'
+
+tr '\n' '@' <$1 |
+sed 's/@@/\n/g;s/@$/\n/' |
+awk -F@ '{
+	for(i=1;i<=NF;i++)
+	{
+		printf("%s\t", $i);
+		for(j=1;j<=NF; j++)
+		{
+			if(i==j) printf("_\\n"); else printf("%s\\n", $j);
+		}
+		printf("\n");
+	}
+}'
+
+tr '\n' '@' <$1 |
+sed 's/@@/\n/g;s/@$/\n/' |
+awk -F@ '{
+	printf("%d\t", NR);
+	for(i=1;i<=NF;i++)
+	{
+		printf("%s\\n", $i);
+	}
+	printf("\n");
 }'
