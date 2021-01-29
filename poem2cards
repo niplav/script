@@ -11,6 +11,12 @@ awk -F@ '{
 		}
 		printf("\t%s\n", $i);
 	}
+	printf("%d\\n\t", NR);
+	for(i=1;i<=NF;i++)
+	{
+		printf("%s\\n", $i);
+	}
+	printf("\n");
 }'
 
 tr '\n' '@' <$1 |
@@ -25,15 +31,4 @@ awk -F@ '{
 		}
 		printf("\n");
 	}
-}'
-
-tr '\n' '@' <$1 |
-sed 's/@@/\n/g;s/@$/\n/' |
-awk -F@ '{
-	printf("%d\\n\t", NR);
-	for(i=1;i<=NF;i++)
-	{
-		printf("%s\\n", $i);
-	}
-	printf("\n");
 }'
