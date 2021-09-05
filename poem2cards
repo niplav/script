@@ -2,7 +2,8 @@
 
 tr '\n' '@' <$1 |
 sed 's/@@/\n/g;s/@$/\n/' |
-awk -F@ '{
+awk -F@ 'BEGIN { a=""; }
+{
 	for(i=1;i<=NF; i++)
 	{
 		for(j=1;j<=NF;j++)
@@ -11,24 +12,18 @@ awk -F@ '{
 		}
 		printf("\t%s\n", $i);
 	}
-	printf("%d\\n\t", NR);
-	for(i=1;i<=NF;i++)
+	if(a!="")
 	{
-		printf("%s\\n", $i);
-	}
-	printf("\n");
-}'
-
-tr '\n' '@' <$1 |
-sed 's/@@/\n/g;s/@$/\n/' |
-awk -F@ '{
-	for(i=1;i<=NF;i++)
-	{
-		printf("%s\\n\t", $i);
-		for(j=1;j<=NF; j++)
+		printf("%s\\n\t", a);
+		for(i=1;i<=NF;i++)
 		{
-			if(i==j) printf("_\\n"); else printf("%s\\n", $j);
+			printf("%s\\n", $i)
 		}
 		printf("\n");
+	}
+	a="";
+	for(i=1;i<=NF;i++)
+	{
+		a=a $i "\\n";
 	}
 }'
