@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+
+import sys
+from collections import deque
+
+if len(sys.argv)!=4:
+	print('linepoem2cards beforelen afterlen poemfile')
+	exit(1)
+
+beforelen=int(sys.argv[1])
+afterlen=int(sys.argv[2])
+
+f=open(sys.argv[3], 'r')
+
+lines=[]
+
+for l in f:
+	lines.append(l.strip())
+
+ll=len(lines)
+
+for i in range(0, ll):
+	print('\\n'.join(lines[max(0,i-beforelen):max(0,i)])+'\\n'+'_\\n'+'\\n'.join(lines[min(i+1, ll):min(i+beforelen+1, ll)]), end='\\n\t')
+	print(lines[i], end='\n')
